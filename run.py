@@ -42,7 +42,9 @@ def index():
     global error
     global text
     global success
-    if request.method == "POST":
+    global flag 
+    if request.method == "POST" and flag:
+        flag = False
         req = request.form
         pin = req["pin"]
         password = req["password"]
@@ -56,8 +58,12 @@ def index():
             success = True
             error = False
         print(pin,password)
-        return redirect(request.url)
-    return render_template("index.html",reply=text, error=error, success=success)
+        return render_template("index.html",reply=text, error=error, success=success)
+    if request.method == "GET" or flag==False:
+        success = False
+        error = False
+        flag = True
+        return render_template("index.html",reply=text, error=error, success=success)
 
 
 
@@ -68,7 +74,6 @@ if __name__ == "__main__":
     text = "Hello"
     error = False
     success = False
-    # app.run(ssl_context=context)
     host="0.0.0.0"
     port = int(os.environ.get('PORT', 5000))
     app_server = gevent.pywsgi.WSGIServer((host,port),app)

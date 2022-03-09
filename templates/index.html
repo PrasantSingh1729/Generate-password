@@ -18,6 +18,12 @@
         <small id="emailHelp" class="form-text text-muted">No need to learn complex Password. Encrypt your simple password with pin and use it.</small>    
         <hr>
         <br>
+        {% if error%}
+        <div style="color: red;">
+            {{reply}}
+        </div>
+        {% endif %}
+        {% if not success%}
         <div class="form-group">
             <label for="exampleInputPassword1">PIN</label>
             <input type="password" class="form-control" id="pin" placeholder="Four digit PIN" name="pin">
@@ -28,13 +34,9 @@
           <input type="password" class="form-control" id="password" placeholder="Password" name="password">
           <small id="emailHelp" class="form-text text-muted">Write a simple password. For exmaple: cat, dog, joker, love.</small>
         </div>
-        {% if error%}
-        <div style="color: red;">
-            {{reply}}
-        </div>
-        {% endif %}
         <br>
         <button type="submit" class="btn btn-primary">Encrypt</button>
+        {% endif %}
         {% if success%}
         <br>
         <div style="color:green;">
