@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+
+{%block title%}Encrypter{%endblock%}
+
+
+
+{%block head%}
+{{ super() }}
+{%endblock%}
+
+
+
+{%block content%}
+<div class="d-flex justify-content-center align-items-center " style="padding-left: 100px; padding-right:100px; padding-top:100px;">     
+    <form action="/" method="POST" >
+        <h1>Password Generator</h1>
+        <small id="emailHelp" class="form-text text-muted">No need to learn complex Password. Encrypt your simple password with pin and use it.</small>    
+        <hr>
+        <br>
+        <div class="form-group">
+            <label for="exampleInputPassword1">PIN</label>
+            <input type="password" class="form-control" id="pin" placeholder="Four digit PIN" name="pin">
+            <small id="emailHelp" class="form-text text-muted">This pin will be used for encrypting your text password to generate complex password.</small>
+            </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+          <small id="emailHelp" class="form-text text-muted">Write a simple password. For exmaple: cat, dog, joker, love.</small>
+        </div>
+        {% if error%}
+        <div style="color: red;">
+            {{reply}}
+        </div>
+        {% endif %}
+        <br>
+        <button type="submit" class="btn btn-primary">Encrypt</button>
+        {% if success%}
+        <br>
+        <div style="color:green;">
+            <br>
+            {{reply}}
+        </div>
+        {% endif %}
+      </form>
+</div>    
+
+{%endblock%}
+
+
+
+{%block footer%}
+{{ super() }}
+{%endblock%}
