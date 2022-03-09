@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect
+import gevent.pywsgi
 # from OpenSSL import SSL
 import os
 # context = SSL.Context(SSL.TLSv1_2_METHOD)
@@ -59,9 +60,17 @@ def index():
         return redirect(request.url)
     return render_template("index.html",reply=text, error=error, success=success)
 
+
+
+
+
+
 if __name__ == "__main__":
     text = "Hello"
     error = False
     success = False
     # app.run(ssl_context=context)
-    app.run(host="0.0.0.0", port=port)
+    host="localhost"
+    app_server = gevent.pywsgi.WSGIServer((host, port), app)
+    app_server.serve_forever()
+    #app.run(threaded=True, port=port)
