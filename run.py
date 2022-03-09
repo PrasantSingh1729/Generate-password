@@ -6,7 +6,6 @@ import os
 # context = SSL.Context(SSL.TLSv1_2_METHOD)
 # context.use_certificate('mycert.crt')
 # context.use_privatekey('myprivatekey.key')
-port = int(os.environ.get('PORT', 5000))
 app = Flask(__name__)
 
 class _encrypter():
@@ -70,7 +69,8 @@ if __name__ == "__main__":
     error = False
     success = False
     # app.run(ssl_context=context)
-    host="localhost"
-    app_server = gevent.pywsgi.WSGIServer((host, port), app)
+    host="0.0.0.0"
+    port = int(os.environ.get('PORT', 5000))
+    app_server = gevent.pywsgi.WSGIServer((host,port),app)
     app_server.serve_forever()
     #app.run(threaded=True, port=port)
