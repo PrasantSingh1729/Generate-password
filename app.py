@@ -63,4 +63,4 @@ if __name__ == "__main__":
     error = False
     success = False
     # app.run(ssl_context=context)
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
